@@ -1,0 +1,12 @@
+torch>=2.2
+gymnasium[classic-control]>=1.0
+stable-baselines3>=2.3
+tensorboard
+onnx
+onnxruntime
+pyyaml
+pandas
+tabulate
+matplotlib
+imageio
+pillow

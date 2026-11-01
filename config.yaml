@@ -1,0 +1,45 @@
+# All experiment settings live here, so every run is reproducible from this file.
+seed: 42
+env_id: CartPole-v1
+
+train:
+  total_timesteps: 300000
+  n_envs: 4
+  # Domain randomization: each episode gets a random pole mass / length,
+  # so the policy learns to handle a range of "machines", not just one.
+  mass_scale_range: [0.5, 3.0]
+  length_scale_range: [0.7, 1.5]
+  # v2: also randomize the disturbances that actually break controllers.
+  # Ranges stay below the hardest test values, so tests still include unseen conditions.
+  noise_std_range: [0.0, 0.15]
+  push_strength_range: [0.0, 1.0]
+  push_prob: 0.05
+
+ppo:
+  learning_rate: 0.0003
+  n_steps: 512
+  batch_size: 64
+  n_epochs: 10
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.0
+
+network:
+  hidden_size: 64
+
+pid:
+  # u = kp*theta + ki*sum(theta)*dt + kd*theta_dot + kx*x + kxd*x_dot ; push right if u > 0
+  kp: 10.0
+  ki: 0.0
+  kd: 2.0
+  kx: 0.5
+  kxd: 1.0
+
+eval:
+  episodes: 30
+  mass_scales: [1.0, 2.0, 3.0, 5.0]       # 5x is outside the training range
+  length_scales: [1.0, 1.5, 2.0]
+  noise_stds: [0.0, 0.05, 0.1, 0.2]       # sensor noise added to observations
+  push_strengths: [0.0, 0.5, 1.0, 1.5]    # random kicks to the pole's angular velocity
+  push_prob: 0.05

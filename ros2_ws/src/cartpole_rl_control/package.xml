@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>cartpole_rl_control</name>
+  <version>0.1.0</version>
+  <description>Deep RL CartPole controller (ONNX) as ROS2 nodes</description>
+  <maintainer email="you@example.com">Your Name</maintainer>
+  <license>MIT</license>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
